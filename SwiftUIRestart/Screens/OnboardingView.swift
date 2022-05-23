@@ -9,6 +9,7 @@ import SwiftUI
 
 struct OnboardingView: View {
     
+    // MARK: property
     // if the isOnboardingViewActive was found in app strage, this would be skipped.
     @AppStorage("onboarding") var isOnboardingViewActive: Bool = true
     
@@ -56,7 +57,7 @@ struct OnboardingView: View {
                 
                 Spacer()
                 
-                // MARK: - hooter
+                // MARK: - footer
                 ZStack {
                     // 1. bg static
                     Capsule()
@@ -99,9 +100,19 @@ struct OnboardingView: View {
                         }
                         .foregroundColor(.white)
                         .frame(width: 80, height: 80, alignment: .center)
-                        .onTapGesture {
-                            isOnboardingViewActive = false
-                        }
+                        .offset(x: buttonOffset)
+                        .gesture(
+                            DragGesture()
+                                .onChanged{ gesture in
+                                    // This is triggered each time the drag gesture happened.
+                                    
+                                    // dragging direction left to right
+                                    // gesture.translation is equivalent to location.{x,y} - startLocation.{x,y}. = amount of dragging
+                                    if gesture.translation.width > 0 && buttonOffset <= buttonWidth - 80 {
+                                        buttonOffset = gesture.translation.width
+                                    }
+                                }
+                        ) //: Gesture
                         
                         // To push the button to the left edge
                         Spacer()
@@ -109,7 +120,7 @@ struct OnboardingView: View {
                     
                     
                 } //: footer
-                .frame(height: 80, alignment: .center)
+                .frame(width: buttonWidth, height: 80, alignment: .center)
                 .padding()
                 
             } //: VSTACK
