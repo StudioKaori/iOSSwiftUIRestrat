@@ -31,14 +31,19 @@ struct HomeView: View {
                 .padding()
             
             // MARK: footer
-            
-            
+            Spacer()
             
             Button(action: {
                 isOnboardingViewActive = true
-            }, label: {
+            }) {
+                
+                // the image and the text are in the button label, then these are automatically horizontally aligned.
+                // so don't need to wrap them in hstack.
+                Image(systemName: "arrow.triangle.2.circlepath.circle.fill")
+                    .imageScale(.large)
+                
                 Text("Restart")
-            })
+            }
         } //: VSTACK
     }
 }
