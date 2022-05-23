@@ -112,6 +112,10 @@ struct OnboardingView: View {
                                         buttonOffset = gesture.translation.width
                                     }
                                 }
+                                .onEnded { _ in
+                                    buttonOffset = 0
+                                    
+                                }
                         ) //: Gesture
                         
                         // To push the button to the left edge
