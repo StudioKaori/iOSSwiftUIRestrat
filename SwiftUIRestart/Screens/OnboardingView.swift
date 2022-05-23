@@ -12,6 +12,11 @@ struct OnboardingView: View {
     // if the isOnboardingViewActive was found in app strage, this would be skipped.
     @AppStorage("onboarding") var isOnboardingViewActive: Bool = true
     
+    // slide button width will be always the screen width - 80(40 padding for each)
+    @State private var buttonWidth: Double = UIScreen.main.bounds.width - 80
+    // this value will be constantly changed while the button is dragged.
+    @State private var buttonOffset: CGFloat = 0
+    
     var body: some View {
         ZStack {
             // fullscreen bg
