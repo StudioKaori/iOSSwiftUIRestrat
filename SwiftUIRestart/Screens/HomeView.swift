@@ -43,7 +43,13 @@ struct HomeView: View {
                     .imageScale(.large)
                 
                 Text("Restart")
-            }
+                    .font(.system(.title3, design: .rounded))
+                    .fontWeight(.bold)
+            } //: Button
+            .buttonStyle(.borderedProminent)
+            .buttonBorderShape(.capsule)
+            .controlSize(.large)
+            
         } //: VSTACK
     }
 }
