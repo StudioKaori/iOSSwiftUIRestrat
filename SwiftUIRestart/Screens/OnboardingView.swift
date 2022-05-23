@@ -71,6 +71,13 @@ struct OnboardingView: View {
                         .padding(8)
                     
                     // 2. call to action static
+                    
+                    Text("Get started")
+                        .font(.system(.title3, design: .rounded))
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                        .offset(x: 20)
+                    
                     // 3. capsule (dynamic width)
                     HStack{
                         Capsule()
@@ -96,6 +103,9 @@ struct OnboardingView: View {
                         }
                         .foregroundColor(.white)
                         .frame(width: 80, height: 80, alignment: .center)
+                        .onTapGesture {
+                            isOnboardingViewActive = false
+                        }
                         
                         // To push the button to the left edge
                         Spacer()
