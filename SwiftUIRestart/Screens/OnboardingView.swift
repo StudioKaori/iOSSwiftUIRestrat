@@ -61,7 +61,50 @@ struct OnboardingView: View {
                 Spacer()
                 
                 // MARK: - hooter
-                
+                ZStack {
+                    // 1. bg static
+                    Capsule()
+                        .fill(Color.white.opacity(0.2))
+                    
+                    Capsule()
+                        .fill(Color.white.opacity(0.2))
+                        .padding(8)
+                    
+                    // 2. call to action static
+                    // 3. capsule (dynamic width)
+                    HStack{
+                        Capsule()
+                            .fill(Color("ColorRed"))
+                            .frame(width: 80)
+                        
+                        // To push the red circle to the left
+                        Spacer()
+                    }
+                    // 4. circle (draggable)
+                    
+                    HStack {
+                        ZStack{
+                            Circle()
+                                .fill(Color("ColorRed"))
+                            
+                            Circle()
+                                .fill(.black.opacity(0.15))
+                                .padding(8)
+                            
+                            Image(systemName: "chevron.right.2")
+                                .font(.system(size: 24, weight: .bold))
+                        }
+                        .foregroundColor(.white)
+                        .frame(width: 80, height: 80, alignment: .center)
+                        
+                        // To push the button to the left edge
+                        Spacer()
+                    } //: Zstack
+                    
+                    
+                } //: footer
+                .frame(height: 80, alignment: .center)
+                .padding()
                 
             } //: VSTACK
         } //: ZSTACK
