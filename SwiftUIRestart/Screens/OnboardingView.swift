@@ -113,7 +113,14 @@ struct OnboardingView: View {
                                     }
                                 }
                                 .onEnded { _ in
-                                    buttonOffset = 0
+                                    if buttonOffset > buttonWidth / 2 {
+                                        // when the button is in the right than half, move to the home screen
+                                        buttonOffset = buttonWidth - 80
+                                        isOnboardingViewActive = false
+                                    } else {
+                                        // the button is in the left than the half, back to the default position
+                                        buttonOffset = 0
+                                    }
                                     
                                 }
                         ) //: Gesture
