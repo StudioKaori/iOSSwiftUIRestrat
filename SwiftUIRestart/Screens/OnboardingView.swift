@@ -128,7 +128,7 @@ struct OnboardingView: View {
                         
                         // To push the button to the left edge
                         Spacer()
-                    } //: Zstack
+                    } //: ZStack
                     
                     
                 } //: footer
