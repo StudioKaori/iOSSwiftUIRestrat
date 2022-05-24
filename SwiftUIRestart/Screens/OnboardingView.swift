@@ -79,7 +79,8 @@ struct OnboardingView: View {
                     HStack{
                         Capsule()
                             .fill(Color("ColorRed"))
-                            .frame(width: 80)
+                            // buttonOffset will start from 0, so add 80
+                            .frame(width: buttonOffset + 80)
                         
                         // To push the red circle to the left
                         Spacer()
