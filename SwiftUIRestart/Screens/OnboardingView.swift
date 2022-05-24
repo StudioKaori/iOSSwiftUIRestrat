@@ -14,9 +14,11 @@ struct OnboardingView: View {
     @AppStorage("onboarding") var isOnboardingViewActive: Bool = true
     
     // slide button width will be always the screen width - 80(40 padding for each)
-    @State private var buttonWidth: Double = UIScreen.main.bounds.width - 80
+    @State private var slideButtonWidth: Double = UIScreen.main.bounds.width - 80
     // this value will be constantly changed while the button is dragged.
-    @State private var buttonOffset: CGFloat = 0
+    @State private var slideButtonOffset: CGFloat = 0
+    
+    private var circleButtonWidth: CGFloat = 80
     
     var body: some View {
         ZStack {
@@ -80,7 +82,7 @@ struct OnboardingView: View {
                         Capsule()
                             .fill(Color("ColorRed"))
                             // buttonOffset will start from 0, so add 80
-                            .frame(width: buttonOffset + 80)
+                            .frame(width: slideButtonOffset + circleButtonWidth)
                         
                         // To push the red circle to the left
                         Spacer()
@@ -100,8 +102,8 @@ struct OnboardingView: View {
                                 .font(.system(size: 24, weight: .bold))
                         }
                         .foregroundColor(.white)
-                        .frame(width: 80, height: 80, alignment: .center)
-                        .offset(x: buttonOffset)
+                        .frame(width: circleButtonWidth, height: circleButtonWidth, alignment: .center)
+                        .offset(x: slideButtonOffset)
                         .gesture(
                             DragGesture()
                                 .onChanged{ gesture in
@@ -109,18 +111,18 @@ struct OnboardingView: View {
                                     
                                     // dragging direction left to right
                                     // gesture.translation is equivalent to location.{x,y} - startLocation.{x,y}. = amount of dragging
-                                    if gesture.translation.width > 0 && buttonOffset <= buttonWidth - 80 {
-                                        buttonOffset = gesture.translation.width
+                                    if gesture.translation.width > 0 && slideButtonOffset <= slideButtonWidth - circleButtonWidth {
+                                        slideButtonOffset = gesture.translation.width
                                     }
                                 }
                                 .onEnded { _ in
-                                    if buttonOffset > buttonWidth / 2 {
+                                    if slideButtonOffset > slideButtonWidth / 2 {
                                         // when the button is in the right than half, move to the home screen
-                                        buttonOffset = buttonWidth - 80
+                                        slideButtonOffset = slideButtonWidth - circleButtonWidth
                                         isOnboardingViewActive = false
                                     } else {
                                         // the button is in the left than the half, back to the default position
-                                        buttonOffset = 0
+                                        slideButtonOffset = 0
                                     }
                                     
                                 }
@@ -132,7 +134,7 @@ struct OnboardingView: View {
                     
                     
                 } //: footer
-                .frame(width: buttonWidth, height: 80, alignment: .center)
+                .frame(width: slideButtonWidth, height: 80, alignment: .center)
                 .padding()
                 
             } //: VSTACK
